@@ -1,0 +1,3 @@
+# Fase 1: sin dependencias externas, solo librería estándar
+# (time, threading). Este fichero se irá completando en fases
+# posteriores (por ejemplo, Flask/FastAPI en la Fase 4).
