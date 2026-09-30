@@ -17,7 +17,8 @@ class Ride:
         self.state = "stopped"          # initial vehicle state
         self.accumulated = 0.0          # fare from already-closed segments
         self.segment_start = now        # start time of the still-open segment
-        self.finished = False
+        self.created_at = now           # start of the whole ride — never changes
+        self.finished = False           # True once finish() has been called
 
     def _rate_for_current_state(self):
         return self.moving_rate if self.state == "moving" else self.stopped_rate
@@ -41,9 +42,9 @@ class Ride:
         self.segment_start = now
         return True
 
-def finish(self, now):
-    """Closes the ride and returns the final fare. Freezes the fare
-    so later reads don't double-count the last segment."""
-    self.accumulated = self.current_fare(now)
-    self.finished = True
-    return self.accumulated
+    def finish(self, now):
+        """Closes the ride and returns the final fare. Freezes the
+        fare so later reads don't double-count the last segment."""
+        self.accumulated = self.current_fare(now)
+        self.finished = True
+        return self.accumulated
